@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>gunzip</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>gunzip</ToolCommandName>
+    <PackageId>rhubarb-geek-nz.gunzip</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Roger Brown</Authors>
+    <Company>rhubarb-geek-nz</Company>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <CertificateThumbprint>601A8B683F791E51F647D34AD102C38DA4DDB65F</CertificateThumbprint>
+    <PackageDescription>gunzip tool</PackageDescription>
+    <RepositoryUrl>https://github.com/rhubarb-geek-nz/gzip</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\common\GZipConstants.cs" Link="GZipConstants.cs" />
+    <Compile Include="..\common\GZipTool.cs" Link="GZipTool.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="SignWindows" AfterTargets="Compile" Condition=" '$(Configuration)' == 'Release' AND '$(OS)' == 'Windows_NT' ">
+    <ItemGroup>
+        <FileToSign Include="$(IntermediateOutputPath)$(TargetFileName)" />
+    </ItemGroup>
+    <Message Importance="high" Text="Signing assemblies: @(FileToSign)" />
+    <SignFile SigningTarget="@(FileToSign)" CertificateThumbprint="$(CertificateThumbprint)" TimestampUrl="http://timestamp.digicert.com" />
+  </Target>
+
+</Project>
