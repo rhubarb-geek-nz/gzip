@@ -235,7 +235,7 @@ namespace RhubarbGeekNz.GZip
             {
                 using (PowerShell powerShell = PowerShell.Create(initialSessionState))
                 {
-                    PSDataCollection<object> inputPipeline = new PSDataCollection<object>() { { new byte[4] } } ;
+                    PSDataCollection<object> inputPipeline = new PSDataCollection<object>() { { new byte[4] } };
 
                     powerShell.AddCommand("ConvertFrom-GZip");
 

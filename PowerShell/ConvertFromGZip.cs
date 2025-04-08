@@ -79,7 +79,7 @@ namespace RhubarbGeekNz.GZip
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            lock(state)
+            lock (state)
             {
                 byte[] ba = new byte[count];
                 Buffer.BlockCopy(buffer, offset, ba, 0, count);
@@ -120,7 +120,7 @@ namespace RhubarbGeekNz.GZip
             {
                 bool readBlocked = false;
 
-                lock(state)
+                lock (state)
                 {
                     state.readBlocked = false;
 
@@ -143,7 +143,7 @@ namespace RhubarbGeekNz.GZip
                         else
                         {
                             byte[] ba = state.readList[0];
-                            int length = ba.Length-state.readOffset;
+                            int length = ba.Length - state.readOffset;
 
                             if (length > count)
                             {
@@ -229,7 +229,7 @@ namespace RhubarbGeekNz.GZip
             }
             finally
             {
-                lock(state)
+                lock (state)
                 {
                     state.exception = exception;
                     state.readBlocked = true;
